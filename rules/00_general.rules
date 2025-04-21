@@ -1,0 +1,2 @@
+# ignore errors (such as missing file for rule)
+-i

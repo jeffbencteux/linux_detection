@@ -1,0 +1,7 @@
+# RDP tools install
+-w /usr/bin/xfreerdp -p wa -k detect_rdp_xfreerdp_install_1
+-w /usr/local/bin/xfreerdp -p wa -k detect_rdp_xfreerdp_install_2
+
+# RDP use
+-w /usr/bin/xfreerdp -p x -k detect_rdp_xfreerdp_1
+-w /usr/local/bin/xfreerdp -p x -k detect_rdp_xfreerdp_2

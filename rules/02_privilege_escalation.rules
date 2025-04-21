@@ -1,0 +1,33 @@
+# User database modification
+-w /etc/passwd -p wa -k detect_modify_passwd
+-w /etc/shadow -p wa -k detect_modify_shadow
+
+# Group database modification
+-w /etc/group -p wa -k detect_modify_group
+-w /etc/gshadow -p wa -k detect_modify_gshadow
+
+# Sudoers addition
+-w /etc/sudoers -p wa -k detect_modify_sudoers
+-w /etc/sudoers.d/ -p wa -k detect_modify_sudoers_d
+
+# Set*id() function family calls to privileged UID (root)
+-a always,exit -S setuid -S setgid -S setreuid -S setregid -F a0=0 -F uid!=0 -k detect_root_setuid_setgid
+
+# Process injection
+# Memory write with ptrace(PTRACE_POKETEXT, ...)
+-a always,exit -S ptrace -F a0=4 -k detect_injection_ptrace_poketext
+
+# Memory write with process_vm_writev()
+-a always,exit -S process_vm_writev -k detect_injection_vm_writev
+
+# Compiler install
+-w /usr/bin/gcc -p wa -k detect_compiler_gcc_install
+-w /usr/bin/g++ -p wa -k detect_compiler_gcc_plusplus_install
+-w /usr/bin/clang -p wa -k detect_compiler_clang_install
+-w /usr/bin/clang++ -p wa -k detect_compiler_clang_plusplus_install
+
+# Compiler usage
+-a always,exit -F path=/usr/bin/gcc -F perm=x -k detect_compiler_gcc
+-a always,exit -F path=/usr/bin/g++ -F perm=x -k detect_compiler_gcc_plusplus
+-a always,exit -F path=/usr/bin/clang -F perm=x -k detect_compiler_clang
+-a always,exit -F path=/usr/bin/clang++ -F perm=x -k detect_compiler_clang_plusplus

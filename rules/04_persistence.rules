@@ -1,0 +1,25 @@
+# ignore errors (such as missing file for rule)
+-i
+
+# Add root SSH keys as non-root user
+-w /root/.ssh/authorized_keys -p wa -F auid!=0 -k detect_add_SSH_root_key
+
+# Non-root users adding privileged cron jobs
+-w /etc/crontab -p wa -F auid!=0 -k detect_add_cron_job_crontab
+-w /etc/anacrontab -p wa -F auid!=0 -k detect_add_cron_job_anacrontab
+-w /etc/cron.d/ -p war -F auid!=0 -k detect_add_cron_job_d
+-w /etc/cron.hourly/ -p war -F auid!=0 -k detect_add_cron_job_hourly
+-w /etc/cron.daily/ -p war -F auid!=0 -k detect_add_cron_job_daily
+-w /etc/cron.weekly/ -p war -F auid!=0 -k detect_add_cron_job_weekly
+-w /etc/cron.monthly/ -p war -F auid!=0 -k detect_add_cron_job_monthly
+-w /etc/cron.yearly/ -p war -F auid!=0 -k detect_add_cron_job_yearly
+
+# Non-root users adding "system" systemd unit files
+-w /etc/systemd/system/ -p wa -F auid!=0 -k detect_add_systemd_etc_system
+-w /lib/systemd/system/ -p wa -F auid!=0 -k detect_add_systemd_lib
+-w /usr/lib/systemd/system/ -p wa -F auid!=0 -k detect_add_systemd_usr_lib
+-w /usr/local/lib/systemd/system/ -p wa -F auid!=0 -k detect_add_systemd_usr_local_lib
+
+# Udev rules
+-w /etc/udev/rules.d/ -p wa -k detect_udev_etc
+-w /usr/lib/udev/rules.d/  -p wa -k detect_udev_usr_lib

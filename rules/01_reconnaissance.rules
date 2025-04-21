@@ -1,0 +1,19 @@
+# tcpdump install/modification
+-w /usr/bin/tcpdump -p wa -k detect_tcpdump_install
+
+# tcpdump use
+-a always,exit -F path=/usr/bin/tcpdump -F perm=x -k detect_tcpdump_exec
+
+# wireshark install/modification
+-w /usr/bin/wireshark -p wa -k detect_wireshark_install
+-w /usr/bin/tshark -p wa -k detect_tshark_install
+
+# tshark/wireshark use
+-a always,exit -F path=/usr/bin/wireshark -F perm=x -k detect_wireshark_exec
+-a always,exit -F path=/usr/bin/tshark -F perm=x -k detect_tshark_exec
+
+# nmap install/modification
+-w /usr/bin/nmap -p wa -k detect_nmap_install
+
+# nmap use
+-w /usr/bin/nmap -p x -k detect_nmap

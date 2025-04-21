@@ -1,0 +1,1 @@
+-a always,exit -S mount -F a0=/dev/dm-0 -k detect_container_evasion_privileged_mount
