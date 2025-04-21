@@ -1,5 +1,2 @@
-# ignore errors (such as missing file for rule)
--i
-
 # Shared memory use
 -w /dev/shm -p wa -k detect_shm_dev_write

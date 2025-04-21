@@ -1,6 +1,3 @@
-# ignore errors (such as missing file for rule)
--i
-
 # Add root SSH keys as non-root user
 -w /root/.ssh/authorized_keys -p wa -F auid!=0 -k detect_add_SSH_root_key
 
